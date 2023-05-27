@@ -48,7 +48,7 @@ def interactive_trigger():
         
     return 'interactive trigger works', 200
 
-@app.route('/trends', methods=['POST'])
+@app.route('/trendz', methods=['POST'])
 def zenserp_trends():
     data = request.form
     channel_id = data.get('channel_id')
@@ -60,7 +60,7 @@ def zenserp_trends():
 
     return 'Thank you for your request', 200
 
-@app.route("/hello", methods=["POST"])
+@app.route("/helloUSMSLACK", methods=["POST"])
 def handle_hello_request():
     data = request.form
     channel_id = data.get('channel_id')
