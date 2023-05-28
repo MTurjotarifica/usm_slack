@@ -3,3 +3,4 @@ from Blocks.blocks import *
 
 
 from BackgroundWorkers.trends import *
+from Routes.trends_route import *
