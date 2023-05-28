@@ -39,7 +39,7 @@ def hellousm():
 handler = SlackRequestHandler(slack_app)
 @app.route("/slack/events", methods=["POST"])
 def slack_events():
-    return handler.handle(request)
+    return handle_hello_request(request)
 
 if __name__ == "__main__":
     app.run(debug=True)
