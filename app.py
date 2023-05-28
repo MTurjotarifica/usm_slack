@@ -49,16 +49,9 @@ def interactive_trigger():
     return 'interactive trigger works', 200
 
 @app.route('/trendz', methods=['POST'])
-def zenserp_trends():
-    data = request.form
-    channel_id = data.get('channel_id')
+def trend_route():
+    return zenserp_trends(client,trend_block)
 
-    client.chat_postMessage(channel=channel_id, 
-                                    text="Trend:  ",
-                                    blocks = trend_block
-                                    )
-
-    return 'Thank you for your request', 200
 
 @app.route("/helloUSMSLACK", methods=["POST"])
 def handle_hello_request():
