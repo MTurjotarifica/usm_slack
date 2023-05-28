@@ -4,9 +4,7 @@ from slack_bolt.adapter.flask import SlackRequestHandler
 from flask import Flask, request
 
 from dotenv import load_dotenv
-from threading import Thread
 
-import json
 
 # Functions to import 
 from Imports.importFunction import *
@@ -25,28 +23,8 @@ client = slack_app.client
 
 @app.route('/slack/interactive-endpoint', methods=['GET','POST'])
 def interactive_trigger():
+    return intTrigger(client, backgroundworker_zenserp_trends)
 
-    data = request.form
-    data2 = request.form.to_dict()
-    channel_id = json.loads(data2['payload'])['container']['channel_id']
-    text = data.get('text')
-
-    response_url = json.loads(data2['payload'])['response_url']
-    action_id = json.loads(data2['payload'])['actions'][0]['action_id']
-
-    if action_id == "trend-select":
-        payload = json.loads(data2['payload'])
-        selected_options = payload['actions'][0]['selected_options']
-        selected_values = [option['value'] for option in selected_options]
-
-        thr = Thread(target=backgroundworker_zenserp_trends, args=[client, text, response_url, channel_id, selected_values])
-        thr.start()
-        
-        
-    else:
-        client.chat_postMessage(channel=channel_id, text="Error: Please try again with different values.")
-        
-    return 'interactive trigger works', 200
 
 @app.route('/trendz', methods=['POST'])
 def trend_route():
@@ -54,13 +32,8 @@ def trend_route():
 
 
 @app.route("/helloUSMSLACK", methods=["POST"])
-def handle_hello_request():
-    data = request.form
-    channel_id = data.get('channel_id')
-    # Execute the /hello command function
-    slack_app.client.chat_postMessage(response_type= "in_channel", channel=channel_id, text="it works!", )
-    client.chat_postMessage(response_type= "in_channel", channel=channel_id, text=" 2nd it works!33!", )
-    return "Hello world1" , 200
+def hellousm():
+    return handle_hello_request(client)
 
 
 handler = SlackRequestHandler(slack_app)
