@@ -1,6 +1,6 @@
 # Functions to import 
 from Blocks.blocks import *
-
+from Blocks.trendBlock import *
 
 from BackgroundWorkers.trends import *
 
