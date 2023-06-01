@@ -11,7 +11,6 @@ from Imports.importFunction import *
 
 load_dotenv()
 
-
 # Initialize the Flask app and the Slack app
 app = Flask(__name__)
 slack_app = App(
@@ -21,6 +20,13 @@ slack_app = App(
 
 client = slack_app.client
 
+# Load the list from the file
+with open('unique_keywords.txt', 'r') as file:
+    unique_keywords = [line.strip() for line in file.readlines()]
+
+# Create a DataFrame with the loaded list as a column
+df = pd.DataFrame({'keyword': unique_keywords})
+
 @app.route('/slack/interactive-endpoint', methods=['GET','POST'])
 def interactive_trigger():
     return intTrigger(client, backgroundworker_zenserp_trends)
@@ -28,7 +34,8 @@ def interactive_trigger():
 
 @app.route('/trendz', methods=['POST'])
 def trend_route():
-    return zenserp_trends(client,trend_block)
+    trend_blocks = generate_trend_block(df)
+    return zenserp_trends(client,trend_blocks)
 
 
 @app.route("/helloUSMSLACK", methods=["POST"])
@@ -39,7 +46,7 @@ def hellousm():
 handler = SlackRequestHandler(slack_app)
 @app.route("/slack/events", methods=["POST"])
 def slack_events():
-    return handle_hello_request(request)
+    return handler.handle(request)
 
 if __name__ == "__main__":
     app.run(debug=True)
