@@ -20,12 +20,6 @@ slack_app = App(
 
 client = slack_app.client
 
-# Load the list from the file
-with open('unique_keywords.txt', 'r', encoding='utf-8') as file:
-    unique_keywords = [line.strip() for line in file.readlines()]
-
-# Create a DataFrame with the loaded list as a column
-df = pd.DataFrame({'keyword': unique_keywords})
 
 @app.route('/slack/interactive-endpoint', methods=['GET','POST'])
 def interactive_trigger():
@@ -34,7 +28,7 @@ def interactive_trigger():
 
 @app.route('/trendz', methods=['POST'])
 def trend_route():
-    trend_blocks = generate_trend_block(df)
+    trend_blocks = generate_trend_block()
     return zenserp_trends(client,trend_blocks)
 
 
