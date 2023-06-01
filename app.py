@@ -21,7 +21,7 @@ slack_app = App(
 client = slack_app.client
 
 # Load the list from the file
-with open('unique_keywords.txt', 'r') as file:
+with open('unique_keywords.txt', 'r', encoding='utf-8') as file:
     unique_keywords = [line.strip() for line in file.readlines()]
 
 # Create a DataFrame with the loaded list as a column
