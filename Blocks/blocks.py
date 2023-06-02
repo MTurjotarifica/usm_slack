@@ -1,4 +1,4 @@
-trend_block= [
+trend_blockss= [
 		{
 			"type": "divider"
 		},
