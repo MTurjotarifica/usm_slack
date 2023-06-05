@@ -27,7 +27,8 @@ def interactive_trigger():
 
 @app.route('/trendz', methods=['POST'])
 def trend_route():
-    trend_blocks = generate_trend_block()
+    df = pd.read_csv('unique_provider.csv')
+    trend_blocks = generate_trend_block(df)
     return zenserp_trends(client,trend_blocks)
 
 
