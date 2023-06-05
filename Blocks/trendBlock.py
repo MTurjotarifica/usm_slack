@@ -4,7 +4,7 @@ import numpy as np
 from sqlalchemy import create_engine, Table, MetaData
 from sqlalchemy import text as sqlalctext #edit st 2023-03-07
 
-def generate_trend_block(df):
+def generate_trend_block():
     trend_block = [
         {
             "type": "divider"
