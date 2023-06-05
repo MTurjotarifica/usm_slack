@@ -4,7 +4,7 @@ import numpy as np
 from sqlalchemy import create_engine, Table, MetaData
 from sqlalchemy import text as sqlalctext #edit st 2023-03-07
 
-def generate_trend_block():
+def generate_trend_block(df):
     trend_block = [
         {
             "type": "divider"
@@ -27,8 +27,7 @@ def generate_trend_block():
             }
         }
     ]
-    # Load the Excel file into a DataFrame
-    df = pd.read_csv('trendBlock/unique_provider.csv')
+    
 
     # Now you can work with the DataFrame
     # For example, you can print the first few rows
