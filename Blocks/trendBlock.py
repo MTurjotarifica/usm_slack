@@ -28,7 +28,7 @@ def generate_trend_block():
         }
     ]
     # Load the Excel file into a DataFrame
-    df = pd.read_csv('unique_provider.csv')
+    df = pd.read_csv('trendBlock/unique_provider.csv')
 
     # Now you can work with the DataFrame
     # For example, you can print the first few rows
